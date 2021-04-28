@@ -6,22 +6,42 @@
             <img src="../static/assets/3.png" class="img-responsive" style="width:100%">
         </div>
         <div class="col-lg-7">
-            <form style="margin-top: 10%;">
+            <form style="margin-top: 10%;" method="POST" action="">
+                {{ form.hidden_tag() }}
                 <fieldset>
                     <h2 class="text-primary">Login</h2>
-
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        {{ form.email.label(class="form-control-label") }} {% if form.email.errors %} {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                            <span>{{ error }}</span> {% endfor %}
+                        </div>
+                        {% else %} {{ form.email(class="form-control form-control-lg") }} {% endif %}
                     </div>
-
                     <div class="form-group">
-                        <label for="exampleInputPassword1"> Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        {{ form.password.label(class="form-control-label") }} {% if form.password.errors %} {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                            <span>{{ error }}</span> {% endfor %}
+                        </div>
+                        {% else %} {{ form.password(class="form-control form-control-lg") }} {% endif %}
                     </div>
+                    <div class="form-check">
+                        {{ form.remember(class="form-check-input") }} {{ form.remember.label(class="form-check-label") }}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+
+
+
+                <div class="border-top pt-3">
+                    <small class="text-danger" ">
+                            Don't have an account? <a class="ml-2 " href="{{ url_for( 'login') }} ">Sign Up</a>
+                        </small>
+                    </div>
                 </fieldset>
             </form>
         </div>
