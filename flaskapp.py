@@ -3,16 +3,16 @@ app = Flask(__name__)
 
 posts = [
     {
-        'author': 'Corey Schafer',
-        'title': 'Blog Post 1',
-        'content': 'First post content',
-        'date_posted': 'April 20, 2018'
+        'author': 'Divya Rao',
+        'title': 'Solo tripping in Coonoor is the best idea',
+        'content': 'Tamil Nadu’s enchanting Coonoor is perhaps best experienced solo. Coonoor’s beautiful outdoors beckons travellers to experience all that it has to share. It is only 18 km away from Ooty, and 71 km from Coimbatore, and is a place that is known for its natural splendour.',
+        'date_posted': 'April 29, 2021'
     },
     {
-        'author': 'Jane Doe',
-        'title': 'Blog Post 2',
-        'content': 'Second post content',
-        'date_posted': 'April 21, 2018'
+        'author': 'Jane Sloan',
+        'title': 'Discovering Crete, The Biggest Island in Greece',
+        'content': 'The beautiful island of Crete happens to also be the largest Greek island, located at the southernmost tip of Greece between the Cretan and Libyan seas.',
+        'date_posted': 'April 20, 2021'
     }
 ]
 

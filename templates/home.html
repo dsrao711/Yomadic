@@ -15,6 +15,44 @@
             <img src="../static/assets/1.png" class="img-responsive" style="width:100%">
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-lg-8">
+            <button type="button" class="btn btn-primary btn-lg btn-block">Read</button> {% for post in posts %}
+            <div class="card border-dark mb-3" style="max-width: 50rem; margin-top:3%">
+                <h3 class="card-header text-primary">{{ post.title }}</h4>
+                    <div class="card-body">
+                        <p class="card-text">{{ post.content }}</p>
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-success">{{ post.author }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ post.date }}</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-4">
+            <button type="button" class="btn btn-primary btn-lg btn-block">Categories</button>
+            <ul class="list-group" style=" margin-top:3%">
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                    Latest
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                    Cuisine
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                    Treks
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                    Must Visit
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
+
+
 {% endblock content %}
