@@ -21,8 +21,9 @@ posts = [
 
 
 @app.route("/")
-@app.route("/home")
+@app.route("/home" , methods = ['GET'])
 def home():
+    form = RegistrationForm()
     return render_template('home.html', posts=posts)
 
 

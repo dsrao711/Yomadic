@@ -2,14 +2,16 @@
 
 <div class="jumbotron">
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-4">
             <img src="../static/assets/3.png" class="img-responsive" style="width:100%">
         </div>
-        <div class="col-lg-7">
-            <form method="POST" action="">
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-6">
+            <form method="POST" action="" class="mx-auto">
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Log In</legend>
+                    <h2 class="text-primary">Login</h2>
                     <div class="form-group">
                         {{ form.email.label(class="form-control-label") }} {% if form.email.errors %} {{ form.email(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
@@ -31,7 +33,7 @@
                     </div>
                 </fieldset>
                 <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-info") }}
+                    {{ form.submit(class="btn btn-primary") }}
                 </div>
                 <small class="text-muted ml-2">
                     <a href="#">Forgot Password?</a>

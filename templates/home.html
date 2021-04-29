@@ -3,10 +3,10 @@
     <div class="row">
         <div class="col-lg-6">
             <div style="margin-top : 15%">
-                <h1 class="display-3">Hello, Yomadics!</h1>
+                <h1 class="display-3">Hello,Yomadics!</h1>
                 <p class="lead">Of all the books in the world. The best stories are found between the pages of a passport</p>
                 <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Explore</a>
+                    <a class="btn btn-primary btn-lg" href="#read" role="button">Explore</a>
                 </p>
             </div>
 
@@ -30,7 +30,7 @@
     <div class="row">
         <div class="col-lg-8">
 
-            <button type="button" class="btn btn-primary btn-lg btn-block">Read</button> {% for post in posts %}
+            <button type="button" class="btn btn-primary btn-lg btn-block" id="read">Read</button> {% for post in posts %}
             <div class="card border-dark mb-3" style="max-width: 50rem; margin-top:3%">
                 <h3 class="card-header text-primary">{{ post.title }}</h4>
                     <div class="card-body">
