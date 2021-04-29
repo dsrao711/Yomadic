@@ -15,6 +15,18 @@
             <img src="../static/assets/1.png" class="img-responsive" style="width:100%">
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %} {% endif %} {% endwith %}
+        </div>
+    </div>
+
+
     <div class="row">
         <div class="col-lg-8">
 
