@@ -78,5 +78,5 @@ def account():
         flash('Your account has been updated!', 'success')
         return redirect(url_for('account'))
     
-    image_file = url_for('static', filename='/assets' + current_user.image_file)
-    return render_template('account.html', title='Account' , form = form)
+    image_file = url_for('static', filename='assets/' + current_user.image_file)
+    return render_template('account.html',  form = form , image_file=image_file)
