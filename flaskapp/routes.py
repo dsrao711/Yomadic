@@ -1,8 +1,7 @@
-
-from flask import render_template, url_for, flash, redirect
-from flaskapp import app, db, bcrypt
-from flaskapp.forms import RegistrationForm, LoginForm
-from flaskapp.models import User, Post
+from flask import render_template, url_for, flash, redirect, request
+from flaskblog import app, db, bcrypt
+from flaskblog.forms import RegistrationForm, LoginForm
+from flaskblog.models import User, Post
 
 posts = [
     {
@@ -21,22 +20,20 @@ posts = [
 
 
 @app.route("/")
-@app.route("/home" , methods = ['GET'])
+@app.route("/home")
 def home():
-    form = RegistrationForm()
     return render_template('home.html', posts=posts)
-
 
 @app.route("/about")
 def about():
-    return render_template('about.html', title='About')
+    return render_template('about.html')
 
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-    
+        
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
