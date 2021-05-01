@@ -24,7 +24,40 @@
 
         </div>
         <div class="col-lg-6">
-            <button type="button" class="btn btn-primary btn-lg btn-block">Update Profile</button>
+
+            <div class="container mt-3 bg-gradient-dark">
+                <h2 class="text-primary">Update Profile</h2>
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <fieldset>
+
+                        <div class="form-group">
+                            {{ form.username.label(class="form-control-label") }} {% if form.username.errors %} {{ form.username(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                <span>{{ error }}</span> {% endfor %}
+                            </div>
+                            {% else %} {{ form.username(class="form-control form-control-lg") }} {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.email.label(class="form-control-label") }} {% if form.email.errors %} {{ form.email(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                <span>{{ error }}</span> {% endfor %}
+                            </div>
+                            {% else %} {{ form.email(class="form-control form-control-lg") }} {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>
+
+
+
+                    </fieldset>
+                </form>
+            </div>
         </div>
     </div>
 </div>
