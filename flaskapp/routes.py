@@ -6,16 +6,16 @@ from flask_login import login_user, current_user, logout_user, login_required
 
 posts = [
     {
-        'author': 'Corey Schafer',
+        'author': 'Divya Rao',
         'title': 'Blog Post 1',
         'content': 'First post content',
-        'date_posted': 'April 20, 2018'
+        'date_posted': 'April 20, 2021'
     },
     {
         'author': 'Jane Doe',
         'title': 'Blog Post 2',
         'content': 'Second post content',
-        'date_posted': 'April 21, 2018'
+        'date_posted': 'April 21, 2021'
     }
 ]
 
@@ -65,3 +65,8 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route("/account")
+@login_required
+def account():
+    return render_template('account.html', title='Account')
