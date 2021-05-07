@@ -27,21 +27,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
+                {% if current_user.is_authenticated %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">My Account</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Cuisine</a>
-                        <a class="dropdown-item" href="#">Pocket Friendly</a>
-                        <a class="dropdown-item" href="#">India</a>
+                        <a class="dropdown-item" href="{{ url_for('account') }}">Edit Profile</a>
+                        <a class=" dropdown-item " href="/myProfile">My Profile</a>
                     </div>
                 </li>
+                {% endif %}
             </ul>
-            <ul class="navbar-nav my-2 my-lg-0">
+            <ul class="navbar-nav my-2 my-lg-0 ">
                 {% if current_user.is_authenticated %}
-                <a class="btn btn-primary  mr-sm-2" href="{{ url_for('logout') }}">Log Out</a>
-                <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a> {% else %}
-                <a class="btn btn-primary  mr-sm-2" href="/login">Log in</a>
-                <a class="btn btn-danger my-2 my-sm-0" href="/register">Sign Up</a> {% endif %}
+                <a class="btn btn-primary mr-sm-2 " href="{{ url_for( 'logout') }} ">Log Out</a> {% else %}
+                <a class="btn btn-primary mr-sm-2 " href="/login ">Log in</a>
+                <a class="btn btn-danger my-2 my-sm-0 " href="/register ">Sign Up</a> {% endif %}
             </ul>
         </div>
     </nav>
@@ -51,13 +51,13 @@
         {% block content %} {% endblock content %}
 
     </div>
-    <blockquote class="blockquote text-center">
+    <blockquote class="blockquote text-center ">
 
-        <footer class="blockquote-footer"><i>Made with ❤️ by Divya Rao </i></footer>
+        <footer class="blockquote-footer "><i>Made with ❤️ by Divya Rao </i></footer>
     </blockquote>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
 </body>
 
 </html>

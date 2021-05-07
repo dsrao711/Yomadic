@@ -19,6 +19,14 @@ def home():
 def about():
     return render_template('about.html')
 
+@app.route("/myProfile" ,  methods=['GET'])
+@login_required
+def myProfile():
+    form = UpdateAccountForm()
+    form.username.data = current_user.username
+    form.email.data = current_user.email
+    image_file = url_for('static', filename='/profile_pics/' + current_user.image_file)
+    return render_template('my_profile.html' , image_file=image_file ,form = form )
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -77,6 +85,7 @@ def account():
             
         current_user.username = form.username.data
         current_user.email = form.email.data
+       
         db.session.commit()
         flash('Your account has been updated!', 'success')
         return redirect(url_for('account'))
