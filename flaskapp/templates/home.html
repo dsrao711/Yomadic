@@ -13,7 +13,7 @@
                     <p class="lead">Of all the books in the world. The best stories are found between the pages of a passport</p>
                     <p class="lead">Find some amazing travel stories and share yours with Yomadic!</p>
                     <p class="lead">
-                        <a class="btn btn-primary btn-lg" href="#read" role="button">Create Account</a> {% endif %}
+                        <a class="btn btn-primary btn-lg" href="/register" role="button">Create Account</a> {% endif %}
                     </p>
             </div>
 
@@ -54,10 +54,10 @@
                         <p class="card-text">{{ post.content }}</p>
                         <div class="row">
                             <div class="col">
-                                <p class="text-success">{{ post.author }}</p>
+                                <p class="text-success">{{ post.author.username }}</p>
                             </div>
                             <div class="col">
-                                <p>{{ post.date }}</p>
+                                <p>{{ post.date_posted.strftime('%Y-%m-%d') }}</p>
                             </div>
                         </div>
                     </div>

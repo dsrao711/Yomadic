@@ -2,29 +2,17 @@ import os
 import secrets
 from flask import render_template, url_for, flash, redirect, request
 from flaskapp import app, db, bcrypt
-from flaskapp.forms import RegistrationForm, LoginForm , UpdateAccountForm
+from flaskapp.forms import RegistrationForm, LoginForm , UpdateAccountForm , PostForm
 from flaskapp.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
-posts = [
-    {
-        'author': 'Divya Rao',
-        'title': 'Blog Post 1',
-        'content': 'First post content',
-        'date_posted': 'April 20, 2021'
-    },
-    {
-        'author': 'Jane Doe',
-        'title': 'Blog Post 2',
-        'content': 'Second post content',
-        'date_posted': 'April 21, 2021'
-    }
-]
+
 
 
 @app.route("/")
 @app.route("/home")
 def home():
+    posts = Post.query.all()
     return render_template('home.html', posts=posts)
 
 @app.route("/about")
@@ -100,3 +88,16 @@ def account():
     
     image_file = url_for('static', filename='/profile_pics/' + current_user.image_file)
     return render_template('account.html',  form = form , image_file=image_file)
+
+@app.route("/post/new", methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('home'))
+    return render_template('createpost.html', title='New Post',
+                           form=form, legend='New Post')
