@@ -1,0 +1,41 @@
+{% extends "layout.html" %} {% block content %}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-lg-4">
+            <img src="../static/assets/10.png" class="img-responsive" style="width:100%">
+
+        </div>
+        <div class="col-lg-8">
+            {% for post in posts %}
+            <div class="card border-dark mb-3" style="max-width: 50rem; margin-top:3%">
+                <a class="card-header text-primary" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a>
+                <div class="card-body">
+                    <p class="card-text" style=" word-break: break-word;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                line-height: 16px; /* fallback */
+                max-height: 32px; /* fallback */
+                -webkit-line-clamp: 2; /* number of lines to show */
+                -webkit-box-orient: vertical;">{{ post.content }}</p>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-success">{{ post.author.username }}</p>
+                        </div>
+                        <div class="col">
+                            <p>{{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+
+
+    </div>
+    {% endblock content %}

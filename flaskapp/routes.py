@@ -15,9 +15,11 @@ def home():
     posts = Post.query.all()
     return render_template('home.html', posts=posts)
 
-@app.route("/myPosts")
+@app.route("/myPosts" ,  methods=['GET'])
+@login_required
 def myPosts():
-    posts = Post.query.all()
+    form = UpdateAccountForm()
+    posts = Post.query.filter_by(author = current_user)
     return render_template('myPosts.html' , posts=posts)
 
 @app.route("/about")
@@ -103,7 +105,7 @@ def account():
         form.email.data = current_user.email
     
     image_file = url_for('static', filename='/profile_pics/' + current_user.image_file)
-    return render_template('account.html',  form = form , image_file=image_file , flag = flag)
+    return render_template('account.html',  form = form , image_file=image_file )
 
 @app.route("/post/new", methods=['GET', 'POST'])
 @login_required
