@@ -1,10 +1,26 @@
 {% extends "layout.html" %} {% block content %}
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card mb-3">
 
-<article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
-    <div class="media-body">
-        <div class="article-metadata">
-            <a class="mr-2" href="#">{{ post.author.username }}</a>
+                <img width="100%" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" class="img-responsive">
+
+                <h5 class="card-header bg-light">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            📝 {{post.author.username}}
+                        </div>
+                        <div class="col-lg-12">
+                            📅 {{ post.date_posted.strftime('%Y-%m-%d') }}
+                        </div>
+                    </div>
+                </h5>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <h2 class="article-title text-white">{{ post.title }}</h2>
+            <p class="article-content text-white">{{ post.content }}</p>
             <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small> {% if post.author == current_user %}
             <div>
                 <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
@@ -12,10 +28,11 @@
             </div>
             {% endif %}
         </div>
-        <h2 class="article-title">{{ post.title }}</h2>
-        <p class="article-content">{{ post.content }}</p>
     </div>
-</article>
+</div>
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
