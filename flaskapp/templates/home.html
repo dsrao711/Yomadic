@@ -77,16 +77,16 @@
             <button type="button" class="btn btn-primary btn-lg btn-block">Categories</button>
             <ul class="list-group" style=" margin-top:3%">
                 <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
-                    Latest
+                    <a href="{{ url_for('Cuisine', page=page_num)}}">Cuisine</a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
-                    Cuisine
+                    <a href="{{ url_for('Trek', page=page_num)}}">Trek</a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
-                    Treks
+                    <a href="{{ url_for('Adventure', page=page_num)}}">Adventure</a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
-                    Must Visit
+                    <a href="{{ url_for('Travel', page=page_num)}}">Travel</a>
                 </li>
             </ul>
         </div>
