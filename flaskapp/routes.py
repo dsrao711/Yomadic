@@ -21,16 +21,41 @@ def home():
 @app.route("/myPosts" ,  methods=['GET'])
 @login_required
 def myPosts():
-    form = UpdateAccountForm()
     posts = Post.query.filter_by(author = current_user)
-    return render_template('myPosts.html' , posts=posts)
+    image_file = url_for('static', filename='/assets/' + '10.png')
+    return render_template('myPosts.html' , posts=posts , image_file = image_file)
 
 @app.route("/Travel" ,  methods=['GET'])
 @login_required
 def Travel():
-    form = UpdateAccountForm()
     posts = Post.query.filter_by(category = 'Travel')
-    return render_template('myPosts.html' , posts=posts)
+    image_file = url_for('static', filename='/assets/' + '7.png')
+    return render_template('myPosts.html' , posts=posts ,image_file = image_file)
+
+@app.route("/Cuisine" ,  methods=['GET'])
+@login_required
+def Cuisine():
+   
+    posts = Post.query.filter_by(category = 'Cuisine')
+    image_file = url_for('static', filename='/assets/' + '14.png')
+    return render_template('myPosts.html' , posts=posts ,image_file = image_file)
+
+@app.route("/Trek" ,  methods=['GET'])
+@login_required
+def Trek():
+    form = UpdateAccountForm()
+    posts = Post.query.filter_by(category = 'Trek')
+    image_file = url_for('static', filename='/assets/' + 'trek.png')
+    return render_template('myPosts.html' , posts=posts , image_file = image_file)
+
+@app.route("/Adventure" ,  methods=['GET'])
+@login_required
+def Adventure():
+    form = UpdateAccountForm()
+    posts = Post.query.filter_by(category = 'Adventure')
+    image_file = url_for('static', filename='/assets/' + 'adv.png')
+    return render_template('myPosts.html' , posts=posts , image_file = image_file)
+
 
 @app.route("/about")
 def about():
