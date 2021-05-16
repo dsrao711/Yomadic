@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 import PIL
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField ,  TextAreaField
+from wtforms.fields.core import SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flaskapp.models import User
 from flask_login import current_user
@@ -33,7 +34,7 @@ class RegistrationForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()] )
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
     
@@ -74,6 +75,7 @@ class UpdateAccountForm(FlaskForm):
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
+    category = SelectField('Category' , validators=[DataRequired()] , choices = [('cu' , 'cuisine')] )
     submit = SubmitField('Post')
 
 
@@ -81,7 +83,7 @@ class RequestResetForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     submit = SubmitField('Request Password Reset')
-
+    
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user is None:
