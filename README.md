@@ -11,5 +11,5 @@
 - SQLAlchemy 
 - HTML 
 - CSS 
-- JS
-
+- AWS RDS 
+- AWS Beanstalk 
