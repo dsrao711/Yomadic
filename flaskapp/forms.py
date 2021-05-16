@@ -75,7 +75,7 @@ class UpdateAccountForm(FlaskForm):
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
-    category = SelectField('Category' , validators=[DataRequired()] , choices = [('cu' , 'cuisine')] )
+    category = SelectField('Category' , validators=[DataRequired()] , choices = [('Cuisine' , 'cuisine') , ('Adventure' , 'adventure') , ('Trek' , 'trek') , ('Travel' , 'Travel')  ] )
     submit = SubmitField('Post')
 
 

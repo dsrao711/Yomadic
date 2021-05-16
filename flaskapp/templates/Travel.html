@@ -1,0 +1,33 @@
+{% extends "layout.html" %} {% block content %}
+<h1>About Page</h1>
+{% if current_user.is_authenticated %}
+<div class="row">
+    <div class="col-lg-8">
+
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="read">Read</button> {% for post in posts.items %}
+        <div class="card border-dark mb-3" style="max-width: 50rem; margin-top:3%">
+            <a class="card-header text-primary" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a>
+            <div class="card-body">
+                <p class="card-text" style=" word-break: break-word;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                line-height: 16px; /* fallback */
+                max-height: 32px; /* fallback */
+                -webkit-line-clamp: 2; /* number of lines to show */
+                -webkit-box-orient: vertical;">{{ post.content }}</p>
+                <div class="row">
+                    <div class="col">
+                        <a class="text-success" href="{{ url_for('user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+                    </div>
+                    <div class="col">
+                        <p>{{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %} {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %} {% if page_num %} {% if posts.page == page_num %}
+        <a class="btn btn-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a> {% else %}
+        <a class="btn btn-outline-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a> {% endif %} {% else %} ... {% endif %} {% endfor %}
+    </div>
+    {% endblock content %}

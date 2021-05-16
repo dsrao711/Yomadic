@@ -25,6 +25,13 @@ def myPosts():
     posts = Post.query.filter_by(author = current_user)
     return render_template('myPosts.html' , posts=posts)
 
+@app.route("/Travel" ,  methods=['GET'])
+@login_required
+def Travel():
+    form = UpdateAccountForm()
+    posts = Post.query.filter_by(category = 'Travel')
+    return render_template('myPosts.html' , posts=posts)
+
 @app.route("/about")
 def about():
     return render_template('about.html')
@@ -114,7 +121,6 @@ def account():
 @login_required
 def new_post():
     try:
-        options = ['Trek' , 'Cuisine' , 'Travel']
         form = PostForm()
         select = request.form.get('category')
         print(select)
@@ -129,7 +135,7 @@ def new_post():
             flash('Your post has been created!', 'success')
             return redirect(url_for('home'))
         return render_template('createpost.html', title='New Post',
-                            form=form, legend='New Post' , options = options)
+                            form=form, legend='New Post' )
     except:
         
         return({'message' : 'Error'})
@@ -143,21 +149,24 @@ def post(post_id):
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
-    post = Post.query.get_or_404(post_id)
-    if post.author != current_user:
-        abort(403)
-    form = PostForm()
-    if form.validate_on_submit():
-        post.title = form.title.data
-        post.content = form.content.data
-        db.session.commit()
-        flash('Your post has been updated!', 'success')
-        return redirect(url_for('post', post_id=post.id))
-    elif request.method == 'GET':
-        form.title.data = post.title
-        form.content.data = post.content
-    return render_template('createpost.html', title='Update Post',
-                           form=form, legend='Update Post' )
+    try:
+        post = Post.query.get_or_404(post_id)
+        if post.author != current_user:
+            abort(403)
+        form = PostForm()
+        if form.validate_on_submit():
+            post.title = form.title.data
+            post.content = form.content.data
+            db.session.commit()
+            flash('Your post has been updated!', 'success')
+            return redirect(url_for('post', post_id=post.id))
+        elif request.method == 'GET':
+            form.title.data = post.title
+            form.content.data = post.content
+        return render_template('createpost.html', title='Update Post',
+                            form=form, legend='Update Post' )
+    except:
+        return({'message' : 'Error'})
 
 
 @app.route("/post/<int:post_id>/delete", methods=['POST'])
