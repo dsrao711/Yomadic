@@ -113,20 +113,26 @@ def account():
 @app.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def new_post():
-    options = ['Trek' , 'Cuisine' , 'Travel']
-    form = PostForm()
-    select = request.form.get('category')
-    category = str(select)
-    
-    if form.validate_on_submit():
+    try:
+        options = ['Trek' , 'Cuisine' , 'Travel']
+        form = PostForm()
+        select = request.form.get('category')
+        print(select)
         
-        post = Post(title=form.title.data, content=form.content.data, author=current_user  , category = select)
-        db.session.add(post)
-        db.session.commit()
-        flash('Your post has been created!', 'success')
-        return redirect(url_for('home'))
-    return render_template('createpost.html', title='New Post',
-                           form=form, legend='New Post' , options = options)
+        category = str(select)
+        
+        if form.validate_on_submit():
+            
+            post = Post(title=form.title.data, content=form.content.data, author=current_user  , category = select)
+            db.session.add(post)
+            db.session.commit()
+            flash('Your post has been created!', 'success')
+            return redirect(url_for('home'))
+        return render_template('createpost.html', title='New Post',
+                            form=form, legend='New Post' , options = options)
+    except:
+        
+        return({'message' : 'Error'})
     
 @app.route("/post/<int:post_id>")
 def post(post_id):
