@@ -2,7 +2,7 @@ import os
 import secrets
 from flask import render_template, url_for, flash, redirect, request, abort
 
-from flaskapp import app, db, bcrypt, mail
+from flaskapp import application, db, bcrypt, mail
 from flaskapp.forms import RegistrationForm, LoginForm, UpdateAccountForm,PostForm, RequestResetForm, ResetPasswordForm
 from flaskapp.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
@@ -11,28 +11,28 @@ from flask_mail import Message
 
 
 
-@app.route("/")
-@app.route("/home")
+@application.route("/")
+@application.route("/home")
 def home():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=3)
     return render_template('home.html', posts=posts)
 
-@app.route("/myPosts" ,  methods=['GET'])
+@application.route("/myPosts" ,  methods=['GET'])
 @login_required
 def myPosts():
     posts = Post.query.filter_by(author = current_user)
     image_file = url_for('static', filename='/assets/' + '10.png')
     return render_template('myPosts.html' , posts=posts , image_file = image_file)
 
-@app.route("/Travel" ,  methods=['GET'])
+@application.route("/Travel" ,  methods=['GET'])
 @login_required
 def Travel():
     posts = Post.query.filter_by(category = 'Travel')
     image_file = url_for('static', filename='/assets/' + '7.png')
     return render_template('myPosts.html' , posts=posts ,image_file = image_file)
 
-@app.route("/Cuisine" ,  methods=['GET'])
+@application.route("/Cuisine" ,  methods=['GET'])
 @login_required
 def Cuisine():
    
@@ -40,7 +40,7 @@ def Cuisine():
     image_file = url_for('static', filename='/assets/' + '14.png')
     return render_template('myPosts.html' , posts=posts ,image_file = image_file)
 
-@app.route("/Trek" ,  methods=['GET'])
+@application.route("/Trek" ,  methods=['GET'])
 @login_required
 def Trek():
     form = UpdateAccountForm()
@@ -48,7 +48,7 @@ def Trek():
     image_file = url_for('static', filename='/assets/' + 'trek.png')
     return render_template('myPosts.html' , posts=posts , image_file = image_file)
 
-@app.route("/Adventure" ,  methods=['GET'])
+@application.route("/Adventure" ,  methods=['GET'])
 @login_required
 def Adventure():
     form = UpdateAccountForm()
@@ -57,11 +57,11 @@ def Adventure():
     return render_template('myPosts.html' , posts=posts , image_file = image_file)
 
 
-@app.route("/about")
+@application.route("/about")
 def about():
     return render_template('about.html')
 
-@app.route("/myProfile" ,  methods=['GET'])
+@application.route("/myProfile" ,  methods=['GET'])
 @login_required
 def myProfile():
     form = UpdateAccountForm()
@@ -70,7 +70,7 @@ def myProfile():
     image_file = url_for('static', filename='/profile_pics/' + current_user.image_file)
     return render_template('my_profile.html' , image_file=image_file ,form = form )
 
-@app.route("/register", methods=['GET', 'POST'])
+@application.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -85,7 +85,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
-@app.route("/login", methods=['GET', 'POST'])
+@application.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -101,7 +101,7 @@ def login():
     return render_template('login.html', title='Login', form=form)
 
 
-@app.route("/logout")
+@application.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('home'))
@@ -111,12 +111,12 @@ def save_picture(form_picture):
     print(random_hex)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.root_path +'\\static\profile_pics', picture_fn)
+    picture_path = os.path.join(application.root_path +'\\static\profile_pics', picture_fn)
     form_picture.save(picture_path)
     
     return picture_fn
 
-@app.route("/account" , methods=['GET', 'POST'])
+@application.route("/account" , methods=['GET', 'POST'])
 @login_required
 def account():
     form = UpdateAccountForm()
@@ -142,7 +142,7 @@ def account():
     image_file = url_for('static', filename='/profile_pics/' + current_user.image_file)
     return render_template('account.html',  form = form , image_file=image_file )
 
-@app.route("/post/new", methods=['GET', 'POST'])
+@application.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def new_post():
     try:
@@ -165,13 +165,13 @@ def new_post():
         
         return({'message' : 'Error'})
     
-@app.route("/post/<int:post_id>")
+@application.route("/post/<int:post_id>")
 def post(post_id):
     post = Post.query.get_or_404(post_id)
     return render_template('post.html', title=post.title, post=post)
 
 
-@app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
+@application.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
     try:
@@ -194,7 +194,7 @@ def update_post(post_id):
         return({'message' : 'Error'})
 
 
-@app.route("/post/<int:post_id>/delete", methods=['POST'])
+@application.route("/post/<int:post_id>/delete", methods=['POST'])
 @login_required
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
@@ -205,7 +205,7 @@ def delete_post(post_id):
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('home'))
 
-@app.route("/user/<string:username>")
+@application.route("/user/<string:username>")
 def user_posts(username):
     page = request.args.get('page', 1, type=int)
     user = User.query.filter_by(username=username).first_or_404()
@@ -227,7 +227,7 @@ If you did not make this request then simply ignore this email and no changes wi
     mail.send(msg)
 
 
-@app.route("/reset_password", methods=['GET', 'POST'])
+@application.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -240,7 +240,7 @@ def reset_request():
     return render_template('reset_request.html', title='Reset Password', form=form)
 
 
-@app.route("/reset_password/<token>", methods=['GET', 'POST'])
+@application.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('home'))
