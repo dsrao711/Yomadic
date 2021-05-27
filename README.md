@@ -12,8 +12,7 @@ https://user-images.githubusercontent.com/59830064/118820648-1764ed80-b8d4-11eb-
 
 #### Technologies used : 
 - Flask 
-- SQLAlchemy 
+- SQL 
 - HTML 
 - CSS 
-- AWS RDS 
-- AWS Beanstalk 
+- AWS Beanstalk
