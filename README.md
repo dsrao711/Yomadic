@@ -20,9 +20,9 @@ https://user-images.githubusercontent.com/59830064/118820648-1764ed80-b8d4-11eb-
 ### 📌Features :
 
 1. Authentication System :
-a)Register : User can create a new profile on Yomadic by providing their email-id and preferred password
-b)Log in : Registered user can log in with their credentials
-c)Forgot password : User get an email by clicking this option thus allowing the user to reset password
+  - Register : User can create a new profile on Yomadic by providing their email-id and preferred password
+  - Log in : Registered user can log in with their credentials
+  - Forgot password : User get an email by clicking this option thus allowing the user to reset password
 
 2. Create Profile :
 User can create profile by uploading a profile picture and creating a username.
