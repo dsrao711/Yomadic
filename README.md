@@ -37,6 +37,6 @@ Users can post their amazing travel stories in the above categories and share it
 Users can view their previous travel experiences , update/delete any of their experiences , user name and profile picture.
 
 
-#### If you liked this project or helped you in any way , please don't forget to star this repo 😉
+#### If you liked this project or if the code helped you in any way , please don't forget to star this repo 😉
 
 Made with 💕 by Divya Rao
